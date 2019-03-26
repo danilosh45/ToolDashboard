@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NoteModelForm
 
 # Create your views here.
@@ -35,6 +35,22 @@ def delete_view(request,id):
 			item_to_delete[0].delete()
 	return redirect('/')		
 
+
+
+def update_view(request, id):
+	unique_note = get_object_or_404(Note, id=id)
+	form = NoteModelForm(request.POST or None, request.FILES or None, instance=unique_note)
+	if form.is_valid():
+		form.instance.user = request.user
+		form.save()
+		return redirect('/')
+
+
+	context = {
+			'form':form
+	}	
+
+	return render (request, "notepad/create.html", context)
 
 
 
