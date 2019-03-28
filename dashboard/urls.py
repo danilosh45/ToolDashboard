@@ -5,12 +5,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 from news.views import scrape
+from .views import home
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('notes/', include('notepad.urls', namespace='notes')),
-    path('scrape', scrape, name='scrape')
+    path('scrape', scrape, name='scrape'),
+    path('home/', home, name='home'),
 ]
 
 if settings.DEBUG:

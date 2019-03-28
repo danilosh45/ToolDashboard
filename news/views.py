@@ -10,6 +10,13 @@ import shutil
 
 from .models import Headline, UserProfile
 
+def news_list(request):
+	headline = Headline.objects.all()
+	contex = {
+		'objects_list': headlines
+	}
+	return render(request, "news/home.html", context)
+
 
 def scrape(request):
 	user_p = UserProfile.objects.filter(user=request.user).first()
@@ -18,7 +25,7 @@ def scrape(request):
 
 	session = requests.Session()
 	session.headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"}
-	
+
 	url = 'https://www.theonion.com/'
 
 	content = session.get(url, verify=False).content
