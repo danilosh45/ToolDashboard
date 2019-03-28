@@ -10,13 +10,6 @@ import shutil
 
 from .models import Headline, UserProfile
 
-def news_list(request):
-	headline = Headline.objects.all()
-	contex = {
-		'objects_list': headlines
-	}
-	return render(request, "news/home.html", context)
-
 
 def scrape(request):
 	user_p = UserProfile.objects.filter(user=request.user).first()
