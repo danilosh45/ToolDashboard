@@ -1,3 +1,6 @@
+import os, django
+os.environ.setdefault("DJANGO_SETTING_DEFAULT_MODULE", "project_name.settings")
+django.setup()
 import math
 from datetime import timedelta, timezone, datetime
 from django.contrib.auth.decorators import login_required
